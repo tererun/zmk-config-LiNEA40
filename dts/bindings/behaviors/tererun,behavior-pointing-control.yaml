@@ -1,0 +1,17 @@
+description: LiNEA40 runtime pointing control
+
+compatible: "tererun,behavior-pointing-control"
+
+include: zero_param.yaml
+
+properties:
+  action:
+    type: string
+    required: true
+    enum:
+      - "toggle-scroll-y"
+      - "toggle-scroll-x"
+      - "mouse-sensitivity-up"
+      - "mouse-sensitivity-down"
+      - "scroll-speed-up"
+      - "scroll-speed-down"

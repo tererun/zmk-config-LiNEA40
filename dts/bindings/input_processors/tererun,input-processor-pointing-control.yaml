@@ -1,0 +1,5 @@
+description: LiNEA40 runtime pointing input processor
+
+compatible: "tererun,input-processor-pointing-control"
+
+include: ip_zero_param.yaml

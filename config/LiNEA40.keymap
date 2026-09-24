@@ -14,7 +14,6 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
-#define SCROLL_REVERSE 7
 
 //mouse cursol
 
@@ -36,6 +35,11 @@
 
 / {
     input_processors {
+        linea40_pointing_processor: linea40_pointing_processor {
+            compatible = "tererun,input-processor-pointing-control";
+            #input-processor-cells = <0>;
+        };
+
         zip_wheel_scaler: zip_wheel_scaler {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -54,10 +58,7 @@
 };
 
 &trackball_listener {
-    reverse_scroller {
-        layers = <SCROLL_REVERSE>;
-        input-processors = <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
-    };
+    input-processors = <&linea40_pointing_processor>;
 
     scroller {
         layers = <SCROLL>;
@@ -65,6 +66,7 @@
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             //スクロール方向を逆転,,
             <&zip_xy_to_scroll_mapper>;
+        process-next;
     };
 };
 
@@ -84,6 +86,48 @@
     };
 
     behaviors {
+        scroll_invert_vertical: scroll_invert_vertical {
+            compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <0>;
+            display-name = "Scroll: Invert Vertical";
+            action = "toggle-scroll-y";
+        };
+
+        scroll_invert_horizontal: scroll_invert_horizontal {
+            compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <0>;
+            display-name = "Scroll: Invert Horizontal";
+            action = "toggle-scroll-x";
+        };
+
+        mouse_sensitivity_up: mouse_sensitivity_up {
+            compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <0>;
+            display-name = "Mouse Sensitivity +";
+            action = "mouse-sensitivity-up";
+        };
+
+        mouse_sensitivity_down: mouse_sensitivity_down {
+            compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <0>;
+            display-name = "Mouse Sensitivity -";
+            action = "mouse-sensitivity-down";
+        };
+
+        scroll_speed_up: scroll_speed_up {
+            compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <0>;
+            display-name = "Scroll Speed +";
+            action = "scroll-speed-up";
+        };
+
+        scroll_speed_down: scroll_speed_down {
+            compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <0>;
+            display-name = "Scroll Speed -";
+            action = "scroll-speed-down";
+        };
+
         re_kp: sensor_rotate_kp {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
@@ -166,7 +210,7 @@
         SCROLL {
             bindings = <
 &kp ESCAPE  &kp C_VOLUME_UP  &kp LS(LC(LG(D)))  &kp LG(LS(NUMBER_5))  &kp INSERT                      &trans            &trans              &kp UP_ARROW    &trans           &trans
-&mo SCROLL_REVERSE  &kp C_VOL_DN     &trans             &kp LG(LS(NUMBER_4))  &trans                          &trans            &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
+&trans      &kp C_VOL_DN     &trans             &kp LG(LS(NUMBER_4))  &trans                          &trans            &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
 &trans      &trans           &trans             &trans                &trans                          &kp LC(UP_ARROW)  &kp LC(DOWN_ARROW)  &trans          &trans           &trans
 &trans      &trans           &trans             &trans                &trans      &trans    &mkp MB3  &mkp MB2                              &trans          &trans           &trans
             >;
@@ -187,15 +231,5 @@
             sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
         };
 
-        //7: Hold the A position on the scroll layer to reverse vertical scrolling.
-
-        SCROLL_REVERSE {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
-            >;
-        };
     };
 };
