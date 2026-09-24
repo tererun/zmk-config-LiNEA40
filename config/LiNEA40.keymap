@@ -14,6 +14,7 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
+#define SCROLL_REVERSE 7
 
 //mouse cursol
 
@@ -53,6 +54,11 @@
 };
 
 &trackball_listener {
+    reverse_scroller {
+        layers = <SCROLL_REVERSE>;
+        input-processors = <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
+    };
+
     scroller {
         layers = <SCROLL>;
         input-processors =
@@ -160,7 +166,7 @@
         SCROLL {
             bindings = <
 &kp ESCAPE  &kp C_VOLUME_UP  &kp LS(LC(LG(D)))  &kp LG(LS(NUMBER_5))  &kp INSERT                      &trans            &trans              &kp UP_ARROW    &trans           &trans
-&trans      &kp C_VOL_DN     &trans             &kp LG(LS(NUMBER_4))  &trans                          &trans            &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
+&mo SCROLL_REVERSE  &kp C_VOL_DN     &trans             &kp LG(LS(NUMBER_4))  &trans                          &trans            &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
 &trans      &trans           &trans             &trans                &trans                          &kp LC(UP_ARROW)  &kp LC(DOWN_ARROW)  &trans          &trans           &trans
 &trans      &trans           &trans             &trans                &trans      &trans    &mkp MB3  &mkp MB2                              &trans          &trans           &trans
             >;
@@ -179,6 +185,17 @@
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
+        };
+
+        //7: Hold the A position on the scroll layer to reverse vertical scrolling.
+
+        SCROLL_REVERSE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
+            >;
         };
     };
 };
