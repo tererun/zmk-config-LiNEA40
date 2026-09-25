@@ -64,7 +64,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,
+            //スクロール方向を逆転,,,,,
             <&zip_xy_to_scroll_mapper>;
 
         process-next;
@@ -218,9 +218,9 @@
 
         SCROLL {
             bindings = <
-&kp ESCAPE  &kp C_VOLUME_UP  &kp LS(LC(LG(D)))  &kp LG(LS(NUMBER_5))  &kp INSERT                      &trans            &trans              &kp UP_ARROW    &trans           &trans
-&trans      &kp C_VOL_DN     &trans             &kp LG(LS(NUMBER_4))  &trans                          &trans            &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
-&trans      &trans           &trans             &trans                &to 6                           &kp LC(UP_ARROW)  &kp LC(DOWN_ARROW)  &trans          &trans           &trans
+&kp ESCAPE  &kp C_VOLUME_UP  &kp LS(LC(LG(D)))  &kp LG(LS(NUMBER_5))  &kp INSERT                      &trans              &trans            &kp UP_ARROW    &trans           &trans
+&trans      &kp C_VOL_DN     &trans             &kp LG(LS(NUMBER_4))  &trans                          &trans              &kp LEFT_ARROW    &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
+&trans      &trans           &trans             &trans                &to 6                           &kp LC(DOWN_ARROW)  &kp LC(UP_ARROW)  &trans          &trans           &trans
 &trans      &trans           &trans             &trans                &trans      &trans    &mkp MB3  &mkp MB2                              &trans          &trans           &trans
             >;
 
