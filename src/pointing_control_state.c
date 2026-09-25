@@ -21,6 +21,7 @@ static const struct scale_ratio mouse_scales[] = {
 static const struct scale_ratio scroll_scales[] = {
     {1, 4},
     {1, 3},
+    {7, 20},
     {2, 5},
     {1, 2},
     {1, 1},
