@@ -14,10 +14,14 @@ static const struct scale_ratio mouse_scales[] = {
     {1, 1},
     {5, 4},
     {3, 2},
+    {7, 4},
+    {2, 1},
 };
 
 static const struct scale_ratio scroll_scales[] = {
+    {1, 4},
     {1, 3},
+    {2, 5},
     {1, 2},
     {1, 1},
     {2, 1},
@@ -35,7 +39,7 @@ static struct {
     int16_t scroll_remainder_x;
     int16_t scroll_remainder_y;
 } control_state = {
-    .mouse_scale = 2,
+    .mouse_scale = 4,
     .scroll_scale = 2,
 };
 
