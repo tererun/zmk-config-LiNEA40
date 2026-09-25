@@ -8,16 +8,9 @@
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
-struct pointing_control_config {
-    enum linea40_pointing_control_action action;
-};
-
 static int pointing_control_pressed(struct zmk_behavior_binding *binding,
                                     struct zmk_behavior_binding_event event) {
-    const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
-    const struct pointing_control_config *config = dev->config;
-
-    linea40_pointing_control_apply(config->action);
+    linea40_pointing_control_apply((enum linea40_pointing_control_action)binding->param1);
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
@@ -35,10 +28,7 @@ static const struct behavior_driver_api pointing_control_driver_api = {
 };
 
 #define POINTING_CONTROL_INST(n)                                                                  \
-    static const struct pointing_control_config pointing_control_config_##n = {                   \
-        .action = DT_INST_ENUM_IDX(n, action),                                                    \
-    };                                                                                            \
-    BEHAVIOR_DT_INST_DEFINE(n, NULL, NULL, NULL, &pointing_control_config_##n, POST_KERNEL,       \
+    BEHAVIOR_DT_INST_DEFINE(n, NULL, NULL, NULL, NULL, POST_KERNEL,                               \
                             CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &pointing_control_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(POINTING_CONTROL_INST)

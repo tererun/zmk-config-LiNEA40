@@ -86,46 +86,51 @@
     };
 
     behaviors {
-        scroll_invert_vertical: scroll_invert_vertical {
+        pointing_control: pointing_control {
             compatible = "tererun,behavior-pointing-control";
+            #binding-cells = <1>;
+        };
+
+        scroll_invert_vertical: scroll_invert_vertical {
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Scroll: Invert Vertical";
-            action = "toggle-scroll-y";
+            bindings = <&pointing_control 0>;
         };
 
         scroll_invert_horizontal: scroll_invert_horizontal {
-            compatible = "tererun,behavior-pointing-control";
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Scroll: Invert Horizontal";
-            action = "toggle-scroll-x";
+            bindings = <&pointing_control 1>;
         };
 
         mouse_sensitivity_up: mouse_sensitivity_up {
-            compatible = "tererun,behavior-pointing-control";
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Mouse Sensitivity +";
-            action = "mouse-sensitivity-up";
+            bindings = <&pointing_control 2>;
         };
 
         mouse_sensitivity_down: mouse_sensitivity_down {
-            compatible = "tererun,behavior-pointing-control";
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Mouse Sensitivity -";
-            action = "mouse-sensitivity-down";
+            bindings = <&pointing_control 3>;
         };
 
         scroll_speed_up: scroll_speed_up {
-            compatible = "tererun,behavior-pointing-control";
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Scroll Speed +";
-            action = "scroll-speed-up";
+            bindings = <&pointing_control 4>;
         };
 
         scroll_speed_down: scroll_speed_down {
-            compatible = "tererun,behavior-pointing-control";
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             display-name = "Scroll Speed -";
-            action = "scroll-speed-down";
+            bindings = <&pointing_control 5>;
         };
 
         re_kp: sensor_rotate_kp {
