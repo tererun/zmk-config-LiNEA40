@@ -6,3 +6,12 @@ if(CONFIG_LINEA40_POINTING_CONTROLS)
     src/pointing_control_state.c
   )
 endif()
+
+if(CONFIG_PMW3610)
+  zephyr_library_named(linea40_pmw3610)
+  zephyr_library_sources(drivers/pmw3610/src/pmw3610.c)
+  zephyr_library_include_directories(
+    drivers/pmw3610/src
+    ${APPLICATION_SOURCE_DIR}/include
+  )
+endif()

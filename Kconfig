@@ -2,3 +2,5 @@ config LINEA40_POINTING_CONTROLS
     bool "LiNEA40 runtime pointing controls"
     default y
     depends on ZMK_POINTING
+
+rsource "drivers/pmw3610/Kconfig"
